@@ -24,6 +24,10 @@ class AddTaskViewModel(
 
     val editTextContent = MutableLiveData<String>()
 
+    override fun onCleared() {
+        super.onCleared()
+        viewModelJob.cancel()
+    }
 
     fun onAddingTask(){
         uiScope.launch{
