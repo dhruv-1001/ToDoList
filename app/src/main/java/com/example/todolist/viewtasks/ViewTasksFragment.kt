@@ -27,10 +27,18 @@ class ViewTasksFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val dataSource = TaskDatabase.getInstance(application).taskDatabaseDao
-        val viewModelFactory = ViewTasksViewModelFactory(dataSource)
+        val viewModelFactory = ViewTasksViewModelFactory(dataSource, application)
         val viewTasksViewModel  = ViewModelProviders.of(this, viewModelFactory)
                 .get(ViewTasksViewModel::class.java)
         binding.viewTasksViewModel = viewTasksViewModel
+        val adapter = TasksAdapter()
+        binding.taskList.adapter = adapter
+
+        viewTasksViewModel.allTasks.observe(viewLifecycleOwner, Observer {
+            it.let {
+                adapter.data = it
+            }
+        })
 
         viewTasksViewModel.navigateToAddTasks.observe(viewLifecycleOwner, Observer {
             if (it == true){

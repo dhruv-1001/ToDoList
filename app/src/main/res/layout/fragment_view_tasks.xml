@@ -14,20 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ScrollView
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/task_list"
             android:layout_width="match_parent"
             app:layout_constraintBottom_toTopOf="@+id/btAddTask"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_height="0dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"/>
-
-        </ScrollView>
+            android:layout_height="0dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         <Button
             android:id="@+id/btAddTask"
