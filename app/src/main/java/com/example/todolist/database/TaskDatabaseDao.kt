@@ -14,6 +14,10 @@ interface TaskDatabaseDao {
     @Query ("SELECT*FROM all_tasks")
     fun getAllTasks(): LiveData<List<Task>>
 
+    @Query("DELETE FROM all_tasks")
+    fun clear()
 
+    @Query("DELETE FROM all_tasks where taskKey = :key")
+    fun deleteTask(key: Long)
 
 }

@@ -1,17 +1,16 @@
 package com.example.todolist.viewtasks
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.todolist.R
-import com.example.todolist.addtask.AddTaskViewModel
 import com.example.todolist.database.TaskDatabase
 import com.example.todolist.databinding.FragmentViewTasksBinding
 
@@ -31,12 +30,17 @@ class ViewTasksFragment : Fragment() {
         val viewTasksViewModel  = ViewModelProviders.of(this, viewModelFactory)
                 .get(ViewTasksViewModel::class.java)
         binding.viewTasksViewModel = viewTasksViewModel
-        val adapter = TasksAdapter()
+        val adapter = TasksAdapter(TaskListener {
+            taskKey -> viewTasksViewModel.onDelete(taskKey)
+        })
         binding.taskList.adapter = adapter
+
+        val manager = GridLayoutManager(activity, 2)
+        binding.taskList.layoutManager = manager
 
         viewTasksViewModel.allTasks.observe(viewLifecycleOwner, Observer {
             it.let {
-                adapter.data = it
+                adapter.submitList(it)
             }
         })
 

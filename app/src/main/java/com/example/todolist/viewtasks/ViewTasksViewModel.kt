@@ -7,14 +7,12 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.example.todolist.database.TaskDatabaseDao
 import com.example.todolist.formatTasks
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 
 class ViewTasksViewModel(private val dataSource: TaskDatabaseDao, private val application: Application): ViewModel() {
 
     private val viewModelJob = Job()
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
+    private val viewModelScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private var _navigateToAddTasks =  MutableLiveData<Boolean?>()
 
@@ -22,18 +20,31 @@ class ViewTasksViewModel(private val dataSource: TaskDatabaseDao, private val ap
 
     val allTasks = dataSource.getAllTasks()
 
-    val taskString = Transformations.map(allTasks){ allTasks ->
-        formatTasks(allTasks, application.resources)
-    }
-
-    init {
-//        getTasks()
-    }
-
     fun navigate(){
         _navigateToAddTasks.value = true
     }
+    private suspend fun clear() {
+        withContext(Dispatchers.IO) {
+            dataSource.clear()
+        }
+    }
 
+    private suspend fun deleteTask(taskKey: Long) {
+        withContext(Dispatchers.IO) {
+            dataSource.deleteTask(taskKey)
+        }
+    }
 
+    fun onClear(){
+        viewModelScope.launch {
+            clear()
+        }
+    }
+
+    fun onDelete(taskKey: Long){
+        viewModelScope.launch {
+            deleteTask(taskKey)
+        }
+    }
 
 }
