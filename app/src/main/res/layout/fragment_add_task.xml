@@ -20,11 +20,36 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="56dp"
             android:ems="10"
-            android:text="@={addTaskViewModel.editTextContent}"
+            android:hint="Task"
+            android:text="@={addTaskViewModel.editTextContentTaskName}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/etDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:hint="Description"
+            android:text="@={addTaskViewModel.editTextContentTaskDescription}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etTask" />
+
+        <DatePicker
+            android:id="@+id/dpDatePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:calendarViewShown="false"
+            android:datePickerMode="spinner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etDescription" />
 
         <Button
             android:id="@+id/btAdd"
@@ -34,9 +59,9 @@
             android:text="ADD"
             android:onClick="@{() -> addTaskViewModel.onAddingTask()}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etTask" />
+            app:layout_constraintTop_toBottomOf="@+id/dpDatePicker" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

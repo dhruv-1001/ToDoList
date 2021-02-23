@@ -35,7 +35,6 @@ class AddTaskFragment : Fragment() {
                 findNavController().navigate(R.id.action_addTaskFragment_to_viewTasksFragment)
             }
         })
-
         return binding.root
     }
 }
