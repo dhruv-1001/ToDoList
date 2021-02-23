@@ -23,13 +23,19 @@ class AddTaskViewModel(
 
     val editTextContentTaskName = MutableLiveData<String>()
     val editTextContentTaskDescription = MutableLiveData<String>()
-    var datePickerContentDay = MutableLiveData<String>().apply { postValue(Calendar.getInstance().get(Calendar.DAY_OF_MONTH).toString())}
-    var datePickerContentMonth = MutableLiveData<String>().apply { postValue((Calendar.getInstance().get(Calendar.MONTH)+1).toString())}
-    var datePickerContentYear = MutableLiveData<String>().apply { postValue(Calendar.getInstance().get(Calendar.YEAR).toString()) }
+    val year: MutableLiveData<Int> = MutableLiveData(Calendar.getInstance().get(Calendar.YEAR))
+    val month: MutableLiveData<Int> = MutableLiveData(Calendar.getInstance().get(Calendar.MONTH))
+    val day: MutableLiveData<Int> = MutableLiveData(Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
 
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
+    }
+
+    fun onDateChanged(Year: Int, Month: Int, Day: Int){
+        year.value = Year
+        month.value = Month
+        day.value = Day
     }
 
     fun onAddingTask(){
@@ -38,9 +44,9 @@ class AddTaskViewModel(
                 val newTask = Task()
                 newTask.taskName = editTextContentTaskName.value.toString()
                 newTask.taskDescription = editTextContentTaskDescription.value.toString()
-                newTask.taskTimeDay = datePickerContentDay.value?.toInt()!!
-                newTask.taskTimeMonth = datePickerContentMonth.value?.toInt()!!
-                newTask.taskTimeYear = datePickerContentYear.value?.toInt()!!
+                newTask.taskTimeDay = day.value!!
+                newTask.taskTimeMonth = month.value?.plus(1)!!
+                newTask.taskTimeYear = year.value!!
                 database.insert(newTask)
             }
             _navigateToViewTasks.value = true

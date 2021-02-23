@@ -43,11 +43,13 @@
             android:id="@+id/dpDatePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:calendarViewShown="false"
             android:datePickerMode="spinner"
+            android:day="@={addTaskViewModel.day}"
+            android:month="@={addTaskViewModel.month}"
+            android:onDateChanged="@{(v, year, month, day) -> addTaskViewModel.onDateChanged(year, month, day)}"
+            android:year="@={addTaskViewModel.year}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etDescription" />
 
