@@ -35,9 +35,6 @@ class ViewTasksFragment : Fragment() {
         })
         binding.taskList.adapter = adapter
 
-        val manager = GridLayoutManager(activity, 2)
-        binding.taskList.layoutManager = manager
-
         viewTasksViewModel.allTasks.observe(viewLifecycleOwner, Observer {
             it.let {
                 adapter.submitList(it)

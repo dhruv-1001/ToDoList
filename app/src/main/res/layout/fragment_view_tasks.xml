@@ -12,37 +12,48 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/background">
+
+        <TextView
+            android:id="@+id/tvToDo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
+            android:text="To-Do"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="35sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/task_list"
             android:layout_width="match_parent"
             app:layout_constraintBottom_toTopOf="@+id/btAddTask"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvToDo"
             android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         <Button
             android:id="@+id/btAddTask"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="32dp"
             android:layout_marginBottom="32dp"
-            android:text="+"
+            android:layout_marginLeft="32dp"
+            android:layout_marginRight="32dp"
+            android:background="@drawable/button_background"
             android:onClick="@{()->viewTasksViewModel.navigate()}"
+            android:text="ADD NEW TASK"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-        <Button
-            android:id="@+id/btClear"
-            android:text="CLEAR"
-            android:onClick="@{()->viewTasksViewModel.onClear()}"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="32dp"
-            android:layout_marginStart="32dp"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

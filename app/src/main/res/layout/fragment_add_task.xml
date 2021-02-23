@@ -12,7 +12,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/background">
 
         <EditText
             android:id="@+id/etTask"
@@ -21,6 +22,7 @@
             android:layout_marginTop="56dp"
             android:ems="10"
             android:hint="Task"
+            android:background="@drawable/edit_text_background"
             android:text="@={addTaskViewModel.editTextContentTaskName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -32,6 +34,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
+            android:background="@drawable/edit_text_background"
+            android:layout_marginTop="8dp"
             app:layout_constraintHorizontal_bias="0.5"
             android:hint="Description"
             android:text="@={addTaskViewModel.editTextContentTaskDescription}"
@@ -54,15 +58,31 @@
             app:layout_constraintTop_toBottomOf="@+id/etDescription" />
 
         <Button
-            android:id="@+id/btAdd"
-            android:layout_width="wrap_content"
+            android:id="@+id/btSave"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="ADD"
-            android:onClick="@{() -> addTaskViewModel.onAddingTask()}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
+            android:background="@drawable/button_background"
+            android:onClick="@{() -> addTaskViewModel.onSaveClick()}"
+            android:text="Save"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dpDatePicker" />
+
+        <Button
+            android:id="@+id/btCancel"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/edit_text_background"
+            android:onClick="@{() -> addTaskViewModel.onCancelClick()}"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dpDatePicker" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

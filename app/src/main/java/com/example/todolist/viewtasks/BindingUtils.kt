@@ -10,3 +10,10 @@ fun TextView.taskName(item: Task){
         text = item.taskName
     }
 }
+
+@BindingAdapter("taskDescription")
+fun TextView.taskDescription(item: Task){
+    item.let{
+        text = item.taskDescription
+    }
+}

@@ -38,7 +38,7 @@ class AddTaskViewModel(
         day.value = Day
     }
 
-    fun onAddingTask(){
+    fun onSaveClick(){
         uiScope.launch{
             withContext(Dispatchers.IO){
                 val newTask = Task()
@@ -52,4 +52,9 @@ class AddTaskViewModel(
             _navigateToViewTasks.value = true
         }
     }
+
+    fun onCancelClick(){
+        _navigateToViewTasks.value = true
+    }
+
 }
