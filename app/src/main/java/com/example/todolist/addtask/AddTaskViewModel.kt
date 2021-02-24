@@ -43,7 +43,11 @@ class AddTaskViewModel(
             withContext(Dispatchers.IO){
                 val newTask = Task()
                 newTask.taskName = editTextContentTaskName.value.toString()
+                newTask.taskName = newTask.taskName.toLowerCase()
+                newTask.taskName = newTask.taskName.capitalize()
                 newTask.taskDescription = editTextContentTaskDescription.value.toString()
+                newTask.taskDescription = newTask.taskDescription.toLowerCase()
+                newTask.taskDescription = newTask.taskDescription.capitalize()
                 newTask.taskTimeDay = day.value!!
                 newTask.taskTimeMonth = month.value?.plus(1)!!
                 newTask.taskTimeYear = year.value!!
