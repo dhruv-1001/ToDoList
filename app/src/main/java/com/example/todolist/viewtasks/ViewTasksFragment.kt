@@ -35,9 +35,21 @@ class ViewTasksFragment : Fragment() {
         })
         binding.taskList.adapter = adapter
 
-        viewTasksViewModel.allTasks.observe(viewLifecycleOwner, Observer {
-            it.let {
-                adapter.submitList(it)
+        viewTasksViewModel.lateTasks.observe(viewLifecycleOwner, Observer {
+            it.let{
+                adapter.addHeaderAndSubmitList(it)
+            }
+        })
+
+        viewTasksViewModel.todayTasks.observe(viewLifecycleOwner, Observer {
+            it.let{
+                adapter.addHeaderAndSubmitList(it)
+            }
+        })
+
+        viewTasksViewModel.upcomingTasks.observe(viewLifecycleOwner, Observer {
+            it.let{
+                adapter.addHeaderAndSubmitList(it)
             }
         })
 
