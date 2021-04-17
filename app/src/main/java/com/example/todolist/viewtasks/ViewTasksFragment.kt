@@ -1,6 +1,7 @@
 package com.example.todolist.viewtasks
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.todolist.R
+import com.example.todolist.database.Task
 import com.example.todolist.database.TaskDatabase
 import com.example.todolist.databinding.FragmentViewTasksBinding
 
@@ -35,23 +37,17 @@ class ViewTasksFragment : Fragment() {
         })
         binding.taskList.adapter = adapter
 
-        viewTasksViewModel.lateTasks.observe(viewLifecycleOwner, Observer {
-            it.let{
-                adapter.addHeaderAndSubmitList(it)
+        viewTasksViewModel.allTasks.observe(viewLifecycleOwner, Observer{
+            it.let {
+                adapter.submitList(it)
             }
         })
 
-        viewTasksViewModel.todayTasks.observe(viewLifecycleOwner, Observer {
-            it.let{
-                adapter.addHeaderAndSubmitList(it)
-            }
-        })
-
-        viewTasksViewModel.upcomingTasks.observe(viewLifecycleOwner, Observer {
-            it.let{
-                adapter.addHeaderAndSubmitList(it)
-            }
-        })
+//        viewTasksViewModel.headingsPos.observe(viewLifecycleOwner, {
+//            it.let{
+//                viewTasksViewModel.onUpdateList()
+//            }
+//        })
 
         viewTasksViewModel.navigateToAddTasks.observe(viewLifecycleOwner, Observer {
             if (it == true){

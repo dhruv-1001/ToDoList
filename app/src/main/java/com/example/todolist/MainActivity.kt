@@ -1,6 +1,5 @@
 package com.example.todolist
 
-import android.os.Build
 import android.os.Bundle
 import android.view.Window
 import android.view.WindowManager

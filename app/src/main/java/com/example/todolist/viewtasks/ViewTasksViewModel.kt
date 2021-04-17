@@ -1,12 +1,12 @@
 package com.example.todolist.viewtasks
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.example.todolist.database.Task
 import com.example.todolist.database.TaskDatabaseDao
-import com.example.todolist.formatTasks
 import kotlinx.coroutines.*
 import java.util.*
 
@@ -20,10 +20,30 @@ class ViewTasksViewModel(private val dataSource: TaskDatabaseDao, private val ap
     val navigateToAddTasks: LiveData<Boolean?> get() = _navigateToAddTasks
 
     val cal = Calendar.getInstance()
+    val day = cal.get(Calendar.DAY_OF_MONTH)
+    val month = cal.get(Calendar.MONTH) + 1
+    val year = cal.get(Calendar.YEAR)
 
-    val lateTasks = dataSource.getLateTasks(cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH)+1, cal.get(Calendar.YEAR))
-    val todayTasks = dataSource.getTodayTasks(cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH)+1, cal.get(Calendar.YEAR))
-    val upcomingTasks = dataSource.getUpdateTasks(cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.MONTH)+1, cal.get(Calendar.YEAR))
+    var allTasks = dataSource.getAllTasks()
+
+    val headings = arrayListOf("All Tasks", "Today", "Late", "Upcoming")
+    val headingsPos = MutableLiveData<Int>()
+
+    private suspend fun updateList(){
+        withContext(Dispatchers.IO){
+            allTasks = if (headingsPos.value == 0) dataSource.getAllTasks()
+            else if (headingsPos.value == 1) dataSource.getTodayTasks(day, month, year)
+            else if (headingsPos.value == 2) dataSource.getLateTasks(day, month, year)
+            else dataSource.getUpcomingTasks(day, month, year)
+        }
+    }
+
+    fun onUpdateList(){
+        viewModelScope.launch {
+            updateList()
+            Log.i("Head Position", "${headingsPos.value}")
+        }
+    }
 
     fun navigate(){
         _navigateToAddTasks.value = true
