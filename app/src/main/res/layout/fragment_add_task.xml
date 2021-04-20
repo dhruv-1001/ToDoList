@@ -6,8 +6,8 @@
 
     <data>
         <variable
-            name="addTaskViewModel"
-            type="com.example.todolist.addtask.AddTaskViewModel" />
+            name="addTodoViewModel"
+            type="com.example.todolist.addtask.AddTodoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:text="@={addTaskViewModel.editTextContentTaskName}" />
+                android:text="@={addTodoViewModel.editTextContentTaskName}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:text="@={addTaskViewModel.editTextContentTaskDescription}" />
+                android:text="@={addTodoViewModel.editTextContentTaskDescription}" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -69,10 +69,10 @@
             android:layout_marginTop="16dp"
             android:calendarViewShown="false"
             android:datePickerMode="spinner"
-            android:day="@={addTaskViewModel.day}"
-            android:month="@={addTaskViewModel.month}"
-            android:onDateChanged="@{(v, year, month, day) -> addTaskViewModel.onDateChanged(year, month, day)}"
-            android:year="@={addTaskViewModel.year}"
+            android:day="@={addTodoViewModel.day}"
+            android:month="@={addTodoViewModel.month}"
+            android:onDateChanged="@{(v, year, month, day) -> addTodoViewModel.onDateChanged(year, month, day)}"
+            android:year="@={addTodoViewModel.year}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/descriptionTextField" />
@@ -84,7 +84,7 @@
             android:layout_marginStart="63dp"
             android:layout_marginTop="32dp"
             android:background="@drawable/button_background"
-            android:onClick="@{() -> addTaskViewModel.onSaveClick()}"
+            android:onClick="@{() -> addTodoViewModel.onSaveClick()}"
             android:paddingTop="10dp"
             android:text="Save"
             android:textAlignment="center"
@@ -101,7 +101,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginEnd="72dp"
             android:background="@drawable/inverse_button_background"
-            android:onClick="@{() -> addTaskViewModel.onCancelClick()}"
+            android:onClick="@{() -> addTodoViewModel.onCancelClick()}"
             android:paddingTop="10dp"
             android:text="Cancel"
             android:textAlignment="center"
