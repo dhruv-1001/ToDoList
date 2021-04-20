@@ -28,6 +28,7 @@ class AddTodoViewModel @Inject constructor(
     val month: MutableLiveData<Int> = MutableLiveData(Calendar.getInstance().get(Calendar.MONTH))
     val day: MutableLiveData<Int> = MutableLiveData(Calendar.getInstance().get(Calendar.DAY_OF_MONTH))
 
+
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
@@ -43,15 +44,22 @@ class AddTodoViewModel @Inject constructor(
         uiScope.launch{
             withContext(Dispatchers.IO){
                 val todo = Todo()
+
                 todo.taskName = editTextContentTaskName.value.toString()
                 todo.taskName = todo.taskName.toLowerCase()
                 todo.taskName = todo.taskName.capitalize()
-                todo.taskDescription = editTextContentTaskDescription.value.toString()
-                todo.taskDescription = todo.taskDescription.toLowerCase()
-                todo.taskDescription = todo.taskDescription.capitalize()
+                if (editTextContentTaskDescription.value.isNullOrBlank()) todo.taskDescription = "No Description"
+                else {
+                    todo.taskDescription = editTextContentTaskDescription.value.toString()
+                    todo.taskDescription = todo.taskDescription.toLowerCase()
+                    todo.taskDescription = todo.taskDescription.capitalize()
+                }
                 todo.taskDay = day.value!!
                 todo.taskMonth = month.value?.plus(1)!!
                 todo.taskYear = year.value!!
+
+                todo.taskDescription = "Complete by : ${day.value}/${month.value}/${year.value}\n" + todo.taskDescription
+
                 todoRepository.insertData(todo)
             }
             _navigateToViewTasks.value = true

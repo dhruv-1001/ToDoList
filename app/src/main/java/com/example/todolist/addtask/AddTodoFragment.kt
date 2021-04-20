@@ -4,23 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.example.todolist.R
-import com.example.todolist.database.TaskDatabase
-import com.example.todolist.databinding.FragmentAddTaskBinding
-import com.example.todolist.todo.Todo
+import com.example.todolist.databinding.FragmentAddTodoBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddTaskFragment : Fragment() {
+class AddTodoFragment : Fragment() {
 
-    private lateinit var binding: FragmentAddTaskBinding
+    private lateinit var binding: FragmentAddTodoBinding
     private val addTodoVIewModel: AddTodoViewModel by viewModels()
 
 
@@ -30,7 +26,7 @@ class AddTaskFragment : Fragment() {
     ): View? {
 
         binding = DataBindingUtil.inflate(
-            inflater, R.layout.fragment_add_task, container, false
+            inflater, R.layout.fragment_add_todo, container, false
         )
 
         binding.addTodoViewModel = addTodoVIewModel

@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".viewtasks.ViewTasksFragment">
+    tools:context=".viewtasks.ViewTodoFragment">
 
     <data>
         <variable
-            name="viewTasksViewModel"
-            type="com.example.todolist.viewtasks.ViewTasksViewModel" />
+            name="viewTodoViewModel"
+            type="com.example.todolist.viewtasks.ViewTodoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,8 +38,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:entries="@{viewTasksViewModel.headings}"
-            android:selectedItemPosition="@={viewTasksViewModel.headingsPos}"
+            android:entries="@{viewTodoViewModel.headings}"
+            android:selectedItemPosition="@={viewTodoViewModel.headingsPos}"
             />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -60,7 +60,7 @@
             android:layout_marginLeft="32dp"
             android:layout_marginRight="32dp"
             android:background="@drawable/button_background"
-            android:onClick="@{()->viewTasksViewModel.navigate()}"
+            android:onClick="@{()->viewTodoViewModel.navigate()}"
             android:text="Add New Task"
             android:textSize="16dp"
             android:textAllCaps="false"

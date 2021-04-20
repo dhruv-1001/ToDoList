@@ -6,12 +6,12 @@
     <data>
 
         <variable
-            name="task"
-            type="com.example.todolist.database.Task" />
+            name="todo"
+            type="com.example.todolist.todo.Todo" />
 
         <variable
             name="clickListener"
-            type="com.example.todolist.viewtasks.TaskListener" />
+            type="com.example.todolist.adapter.TodoListener" />
 
     </data>
 
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:button="@drawable/custom_checkbox"
-                android:onClick="@{()->clickListener.onClick(task)}"
+                android:onClick="@{()->clickListener.onClick(todo)}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -75,7 +75,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                app:taskName="@{task}" />
+                app:taskName="@{todo}" />
 
             <TextView
                 android:id="@+id/tvTaskDescription"
@@ -88,7 +88,7 @@
                 android:textSize="14sp"
                 android:autoSizeTextType="uniform"
                 android:textColor="#999999"
-                app:taskDescription="@{task}"
+                app:taskDescription="@{todo}"
                 app:layout_constraintTop_toBottomOf="@+id/tvTaskName" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
