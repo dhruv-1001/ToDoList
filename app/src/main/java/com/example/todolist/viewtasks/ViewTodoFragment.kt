@@ -53,36 +53,6 @@ class ViewTodoFragment : Fragment() {
             }
         })
 
-
-//        val application = requireNotNull(this.activity).application
-//        val dataSource = TaskDatabase.getInstance(application).taskDatabaseDao
-//        val viewModelFactory = ViewTasksViewModelFactory(dataSource, application)
-//        val viewTasksViewModel  = ViewModelProviders.of(this, viewModelFactory)
-//                .get(ViewTasksViewModel::class.java)
-
-
-//        val adapter = TasksAdapter(TaskListener {
-//                taskKey -> viewTasksViewModel.onDelete(taskKey)
-//        })
-//
-//        binding.taskList.adapter = adapter
-//
-//        viewTasksViewModel.allTasks.observe(viewLifecycleOwner, {
-//            it.let {
-//                adapter.submitList(it)
-//            }
-//        })
-//
-//        viewTasksViewModel.headingsPos.observe(viewLifecycleOwner, {
-//            updateTodo(it, adapter, viewTasksViewModel)
-//        })
-//
-//        viewTasksViewModel.navigateToAddTasks.observe(viewLifecycleOwner, {
-//            if (it == true){
-//                findNavController().navigate(R.id.action_viewTasksFragment_to_addTaskFragment)
-//            }
-//        })
-
         return binding.root
     }
 

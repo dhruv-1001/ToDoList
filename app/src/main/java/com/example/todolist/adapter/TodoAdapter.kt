@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todolist.databinding.ListItemTaskBinding
 import com.example.todolist.todo.Todo
 
-
 class TodoAdapter(
     val clickListener: TodoListener
 ): ListAdapter<Todo, TodoAdapter.ViewHolder>(ViewTodoDiffCallBack()){
